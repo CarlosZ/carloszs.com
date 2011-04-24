@@ -1,7 +1,22 @@
 $(function() {
-    $("section .content").css("visibility", "visible");
-    var email = ['carlos', 'luis', 'zuniga', '@', 'gmail', '.', 'com'].join("");
+    var email = ['me', '@', 'carloszs', '.', 'com'].join(""),
+        imgIndex = 1,
+        loadedImages = 0;
     $(".email").attr("href", "mailto:" + email).html(email);
+
+    // Show section content only when images are loaded
+    for (imgIndex = 1; imgIndex < 5; imgIndex++) {
+        $("<img>")
+            .load(function() {
+                loadedImages++;
+                if (loadedImages == 4) {
+                    $("section .content").css("visibility", "visible");
+                }
+            })
+            .attr("src", "images/sunset_0" + (imgIndex) + ".jpg")
+            .hide()
+            .appendTo("body");
+    }
 
     $("#main h1").click(toggle);
 
